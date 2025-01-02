@@ -74,9 +74,15 @@ client.on('message', async(topic,message)=>{
         const payload =JSON.parse(message.toString());
         const {Date,Time,Location, Readings,Battery} = payload;
 
+        // Fetch the latest index dynamically right before inserting
+        const latestEntry = await UserModel.findOne().sort({ Index: -1 });
+
+        const currentIndex = latestEntry ? latestEntry.Index + 1 : 1;
+
+
         // create new document based on the retrieved data
         const newData = new UserModel({
-            Index:nextIndex,
+            Index:currentIndex,
             //Date: new Date(),
             //Time:new Date().toLocaleTimeString(),
             Date, Time, Location, Readings, Battery
