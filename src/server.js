@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import mqtt from 'mqtt';
 import cors from 'cors';
+//"mongoose": "^8.8.0", 
+
 
 const app = express();
 app.use(cors())
